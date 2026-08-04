@@ -1,0 +1,50 @@
+[build]
+  command = "node scripts/build.js"
+  publish = "dist"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Force the canonical www-less HTTPS domain (adjust if you prefer the www version)
+[[redirects]]
+  from = "http://truenorthgroupltd.com/*"
+  to = "https://truenorthgroupltd.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.truenorthgroupltd.com/*"
+  to = "https://truenorthgroupltd.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.truenorthgroupltd.com/*"
+  to = "https://truenorthgroupltd.com/:splat"
+  status = 301
+  force = true
+
+# Unrelated subdomain redirect carried over from the previous site
+[[redirects]]
+  from = "https://growflow.truenorthgroupltd.com/*"
+  to = "https://glow-ap.netlify.app/:splat"
+  status = 200
